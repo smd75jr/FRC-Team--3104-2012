@@ -1,0 +1,300 @@
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) FIRST 2008. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
+
+//--------------------------------------------------//
+//		######## ########    ###    ##     ##		//
+//   	   ##    ##         ## ##   ###   ###		//
+//   	   ##    ##        ##   ##  #### ####		//
+//   	   ##    ######   ##     ## ## ### ##		//
+//   	   ##    ##       ######### ##     ##		//
+//   	   ##    ##       ##     ## ##     ##		//
+//   	   ##    ######## ##     ## ##     ##		//
+//													//
+//		 #######     ##     #####   ##    ##		//
+//		##     ##  ####    ##   ##  ##    ##		//
+//		       ##    ##   ##     ## ##    ##		//
+//		 #######     ##   ##     ## ##    ##		//
+//		       ##    ##   ##     ## #########		//
+//		##     ##    ##    ##   ##        ##		//
+//		 #######   ######   #####         ##		//
+//--------------------------------------------------//
+
+
+
+//List Of All Of The Digital Sidecar Ports And What They Are Being Used For
+//
+//
+//****Motor/PWM Ports****Start
+//
+//	Port 1: Jaguar For Right Drive Motor
+//	Port 2: Jaguar For Left Drive Motor
+//	Port 3: Jaguar For Ball Picker Motors
+//	Port 4: Jaguar For Ball Shooter Motors
+//	Port 5: Victor For Ball Shooter Turret Rotation Motor
+//	Port 6: Empty
+//	Port 7: Empty
+//	Port 8: Empty
+//	Port 9: Empty
+//	Port 10: Empty
+//
+//****Motor/PWM Ports****End
+//
+//
+//****Relay/PWM Ports****Start
+//
+//	Port 1: Spike Relay That Controls The Compressor
+//	Port 2: Empty
+//	Port 3: Empty
+//	Port 4: Empty
+//	Port 5: Empty
+//	Port 6: Empty
+//	Port 7: Empty
+//	Port 8: Empty
+//
+//****Relay/PWM Ports****End
+//
+//
+//****Digital I/O Ports****Start
+//
+//	Port 1: Pressure Sensor
+//	Port 2: Empty
+//	Port 3: Empty
+//	Port 4: Empty
+//	Port 5: Empty
+//	Port 6: Empty
+//	Port 7: Empty
+//	Port 8: Empty
+//	Port 9: Empty
+//	Port 10: Empty
+//	Port 11: Empty
+//	Port 12: Empty
+//	Port 13: Empty
+//	Port 14: Empty
+//
+//****Digital I/O Ports****End
+//
+//
+//****Solenoid Ports****Start
+//
+//	Port 1: Solenoid That Controlls The Piston Which Holds The Ball Before The Shooter
+//	Port 2: Solenoid That Controlls The Piston Which Pushes The Ball Into The Shooter
+//	Port 3: Empty
+//	Port 4: Empty
+//	Port 5: Empty
+//	Port 6: Empty
+//	Port 7: Empty
+//	Port 8: Empty
+//
+//****Solenoid Ports****End
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+//import package edu.wpi.first.wpilibj.samples;
+
+package edu.wpi.first.wpilibj.templates;
+import edu.wpi.first.wpilibj.SimpleRobot;
+import edu.wpi.first.wpilibj.RobotDrive; //import the classes for RobotDrive
+import edu.wpi.first.wpilibj.Relay; //import the classes for the Relays
+import edu.wpi.first.wpilibj.Solenoid; //import the classes for the Solonoids
+import edu.wpi.first.wpilibj.DriverStationLCD; //import the classes for the DriverStationLCD
+import edu.wpi.first.wpilibj.AnalogModule; //import the classes for the AnalogModule
+import edu.wpi.first.wpilibj.DigitalModule; //import the classes for the DigitalModule
+import edu.wpi.first.wpilibj.Compressor; //import the classes for the Compressor
+import edu.wpi.first.wpilibj.Jaguar; //import the classes for the Jaguar
+import edu.wpi.first.wpilibj.Victor; //import the classes for the Victor
+import edu.wpi.first.wpilibj.Timer; //import the classes for the Timer
+import edu.wpi.first.wpilibj.Watchdog; //import the classes for the Watchdog
+import edu.wpi.first.wpilibj.Joystick; //import the classes for the Joystick
+//import edu.wpi.first.wpilibj.RobotDrive; //import the classes for RobotDrive (duplicate)
+import edu.wpi.first.wpilibj.SensorBase; //import the classes for the SensorBase
+import edu.wpi.first.wpilibj.camera.AxisCamera; //import the classes for the AxisCamera
+import edu.wpi.first.wpilibj.camera.AxisCameraException; //import the classes for the AxisCamera
+import edu.wpi.first.wpilibj.image.ColorImage;
+import edu.wpi.first.wpilibj.image.NIVisionException;
+import edu.wpi.first.wpilibj.*;
+
+
+public class RobotTemplate extends SimpleRobot
+	{
+
+
+//******Variables For The Joysticks******Start
+
+		Joystick leftStick  = new Joystick(1); //declare the left joystick
+		Joystick rightStick = new Joystick(2); //declare the right joystick
+
+//******Variables For The Joysticks******End
+
+
+//******Variables For The Compressor******Start
+
+		Compressor compressor = new Compressor(1,1); //declare the compressor (the first argument is the preasure switch channel in the digital I/O section of the digital sidecar, the second argument is the compressor relay channel in the Relay section of the digital sidecar)
+
+//******Variables For The Compressor******End
+
+
+//******Variable For The Drive Type******Start
+
+		RobotDrive mydrive = new RobotDrive(2,1); //declare the robot drive variable
+
+//******Variable For The Drive Type******End
+
+
+//******Variables For The Jaguars******Start
+
+		Jaguar jagthree = new Jaguar(3); //Jaguar for controlling the ball picker motors (will be two Jaguars and two motors but only one I/O pin with a splitter cable)
+		Jaguar jagfour = new Jaguar(4); //Jaguar for controlling the ball shooter (will be two Jaguars and two motors but only one I/O pin with a splitter cable)
+
+//******Variables For The Jaguars******End
+
+
+//******Variables For The Victors******Start
+
+		Victor victone = new Victor(5); //Victor for rotating the turret
+
+//******Variables For The Jaguars******End
+
+
+//******Variables For The Solonoid******Start
+
+		Solenoid solone = new Solenoid(1); //Solenoid That Controlls The Piston Which Holds The Ball Before The Shooter
+		Solenoid soltwo = new Solenoid(2); //Solenoid That Controlls The Piston Which Pushes The Ball Into The Shooter
+
+//******Variables For The Solonoid******End
+
+
+
+		private static int a = 0; //not sure what this does!!!!!!!!!!!!!!
+	
+//    	Servo arm1 = new Servo(7); //for use by the camera servos
+//    	Servo arm2 = new Servo(8); //for use by the camera servos
+
+
+//******Variable For The Camera******Start
+
+		AxisCamera cam; //declareing the camera
+
+//******Variable For The Camera******End
+
+
+
+
+
+
+		public RobotTemplate() //not sure what this is for, but leaving it in for safety reasons because it deals with the Watchdog class
+			{
+
+				getWatchdog().setEnabled(false); //the Watchdog, don't forget to LEAVE IT EXACTALY HOW IT IS!!!!!!!!
+
+			}
+
+		public void robotInit() //run any code that only needs to be run once on cRIO boot
+			{
+				
+				compressor.start(); //start the compressor (left in for simplicity in case we decide to use it)
+				Timer.delay(10.0); //delay of some sort (leaving it in so that it doesn't cause any conflicts
+				cam = AxisCamera.getInstance(); //initialize the Axis Camera
+				cam.writeResolution(AxisCamera.ResolutionT.k160x120); //Specify the camera resolution (dont set this to high unless you like lag)
+//        		cam.writeColorLevel(1);
+				cam.writeBrightness(0); //specify the camera brightness
+
+			}
+
+
+
+		public void autonomous() //code for autonomous mode
+			{x
+	
+//				getWatchdog().setEnabled(false);
+//				mydrive.drive(0.1,0.1);
+//				mydrive.drive(0,0);
+
+			}
+
+
+		public void operatorControl() //code for tele-operated mode
+			{
+//				compressor.start();  //start the compressor (left in for simplicity)
+
+				while(isOperatorControl()) //begin the main loop of the code
+					{
+						
+//******Camera******Start (not sure what this does)
+						ColorImage image = null;
+							try {
+									if (cam.freshImage())
+										{
+											// && turnController.onTarget()) {
+											image = cam.getImage();
+										}
+								}
+							catch (NIVisionException ex)
+								{
+									ex.printStackTrace();
+								}
+							catch (AxisCameraException ex)
+								{
+									ex.printStackTrace();
+								}
+							finally
+								{
+									try
+										{
+											if (image != null)
+												{
+													image.free();
+												}
+										}
+									catch (NIVisionException ex)
+										{
+											
+										}
+								}
+//******Camera******End
+
+
+
+//******Drive******Start
+
+		//mydrive.arcadeDrive(leftStick); //specify the type of drive/what joystick to use
+		mydrive.tankDrive(leftStick, rightStick);
+		Timer.delay(0.0001); //old
+
+//******Drive******End
+
+
+//******Solonoids******Start
+
+		if (rightStick.getRawButton(1)==true) //trigger the solonoid attached to port 1 (left in for testing purposes)
+			{
+				solone.set(true);
+			}
+		else
+			{
+				solone.set(false);
+			}
+
+//******Solonoids******End
+
+					}
+			}
+	}
+
