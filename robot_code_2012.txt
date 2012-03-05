@@ -102,7 +102,7 @@
 //import package edu.wpi.first.wpilibj.samples;
 
 package edu.wpi.first.wpilibj.templates;
-import edu.wpi.first.wpilibj.SimpleRobot;
+import edu.wpi.first.wpilibj.SimpleRobot; //import the classes for the SimpleRobot base class
 import edu.wpi.first.wpilibj.RobotDrive; //import the classes for RobotDrive
 import edu.wpi.first.wpilibj.Relay; //import the classes for the Relays
 import edu.wpi.first.wpilibj.Solenoid; //import the classes for the Solonoids
