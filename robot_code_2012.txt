@@ -30,11 +30,11 @@
 //
 //****Motor/PWM Ports****Start
 //
-//	Port 1: Jaguar For Right Drive Motor
-//	Port 2: Jaguar For Left Drive Motor
+//	Port 1: Jaguar For Right Drive Motor (1x CIM)
+//	Port 2: Jaguar For Left Drive Motor (1x CIM)
 //	Port 3: Jaguar For Ball Picker Motors
 //	Port 4: Jaguar For Ball Shooter Motors
-//	Port 5: Victor For Ball Shooter Turret Rotation Motor
+//	Port 5: Jaguar For Ball Shooter Turret Rotation Motor (2x CIM)
 //	Port 6: Empty
 //	Port 7: Empty
 //	Port 8: Empty
