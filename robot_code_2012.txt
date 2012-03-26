@@ -224,7 +224,7 @@ public class RobotTemplate extends SimpleRobot
 
 		public void operatorControl() //code for tele-operated mode
 			{
-//				compressor.start();  //start the compressor (left in for simplicity)
+				compressor.start();  //start the compressor (left in for simplicity)
 
 				while(isOperatorControl()) //begin the main loop of the code
 					{
@@ -267,10 +267,35 @@ public class RobotTemplate extends SimpleRobot
 //******Drive******Start
 
 		//mydrive.arcadeDrive(leftStick); //specify the type of drive/what joystick to use
-		mydrive.tankDrive(leftStick, rightStick);
+		mydrive.tankDrive(leftStick);
 		Timer.delay(0.0001); //old
 
 //******Drive******End
+
+
+
+//******Joystick******Start
+
+		if (rightStick.getRawButton(2)==true) //ballpicker controll - up
+			{
+				jagthree.set(1);
+			}
+		else
+			{
+				jagthree.set(0);
+			}
+			
+			if (rightStick.getRawButton(3)==true) //ballpicker controll - down
+			{
+				jagthree.set(-1);
+			}
+		else
+			{
+				jagthree.set(0);
+			}
+
+//******Joystick******End
+
 
 
 //******Solonoids******Start
