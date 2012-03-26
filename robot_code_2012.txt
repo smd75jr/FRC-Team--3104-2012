@@ -33,8 +33,8 @@
 //	Port 1: Jaguar For Right Drive Motor (1x CIM)
 //	Port 2: Jaguar For Left Drive Motor (1x CIM)
 //	Port 3: Jaguar For Ball Picker Motors
-//	Port 4: Jaguar For Ball Shooter Motors
-//	Port 5: Jaguar For Ball Shooter Turret Rotation Motor (2x CIM)
+//	Port 4: Jaguar For Ball Shooter Motors (2x CIM)
+//	Port 5: Jaguar For Ball Shooter Turret Rotation Motor
 //	Port 6: Empty
 //	Port 7: Empty
 //	Port 8: Empty
@@ -154,13 +154,14 @@ public class RobotTemplate extends SimpleRobot
 
 		Jaguar jagthree = new Jaguar(3); //Jaguar for controlling the ball picker motors (will be two Jaguars and two motors but only one I/O pin with a splitter cable)
 		Jaguar jagfour = new Jaguar(4); //Jaguar for controlling the ball shooter (will be two Jaguars and two motors but only one I/O pin with a splitter cable)
+		Jaguar jagfive = new Jaguar(5); //Jaguar for rottating the turret
 
 //******Variables For The Jaguars******End
 
 
 //******Variables For The Victors******Start
 
-		Victor victone = new Victor(5); //Victor for rotating the turret
+//		Victor victone = new Victor(5); //Victor for rotating the turret
 
 //******Variables For The Jaguars******End
 
@@ -285,7 +286,7 @@ public class RobotTemplate extends SimpleRobot
 				jagthree.set(0);
 			}
 			
-			if (rightStick.getRawButton(3)==true) //ballpicker controll - down
+		if (rightStick.getRawButton(3)==true) //ballpicker controll - down
 			{
 				jagthree.set(-1);
 			}
@@ -293,6 +294,31 @@ public class RobotTemplate extends SimpleRobot
 			{
 				jagthree.set(0);
 			}
+		
+		
+		
+		
+		if (rightStick.getRawButton(4)==true) //rotate turret right
+			{
+				jagfive.set(1);
+			}
+		else
+			{
+				jagfive.set(0);
+			}
+			
+			
+			
+		if (rightStick.getRawButton(5)==true) //rotate turret left
+			{
+				jagfive.set(-1);
+			}
+		else
+			{
+				jagfive.set(0);
+			}
+		
+		
 
 //******Joystick******End
 
