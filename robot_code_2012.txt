@@ -277,6 +277,13 @@ public class RobotTemplate extends SimpleRobot
 
 //******Joystick******Start
 
+		if (rightStick.getRawButton(1)==true) //shooter trigger
+			{
+				
+		
+		
+		
+		
 		if (rightStick.getRawButton(2)==true) //ballpicker controll - up
 			{
 				jagthree.set(1);
@@ -285,7 +292,8 @@ public class RobotTemplate extends SimpleRobot
 			{
 				jagthree.set(0);
 			}
-			
+		
+		
 		if (rightStick.getRawButton(3)==true) //ballpicker controll - down
 			{
 				jagthree.set(-1);
@@ -306,9 +314,8 @@ public class RobotTemplate extends SimpleRobot
 			{
 				jagfive.set(0);
 			}
-			
-			
-			
+		
+		
 		if (rightStick.getRawButton(5)==true) //rotate turret left
 			{
 				jagfive.set(-1);
